@@ -74,6 +74,8 @@ export default function App() {
         <FormSplitBill
           selectedFriend={selectedFriend}
           onSplitBill={handleSplitBill}
+          //added key prop to make each component instance unique
+          key={selectedFriend.id}
         />
       )}
     </div>
