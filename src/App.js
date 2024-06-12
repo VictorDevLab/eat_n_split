@@ -47,7 +47,7 @@ function Friend({ friend }) {
   return (
     <li>
       <img src={friend.image} alt={friend.name} />
-      <h3>{friend.name}</h3>
+      <h3 className="h3">{friend.name}</h3>
 
       {/* mutually exclusive, meaning only one of them will apply */}
       {
