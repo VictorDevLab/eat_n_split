@@ -33,7 +33,9 @@ export default function App() {
   }
 
   function handleSelectFriend(friend) {
-    setSelectedFriend(selectedFriend ? null: friend);
+    setSelectedFriend(selectedFriend => selectedFriend?.id ===friend.id ? null: friend);
+    //hide the add friend form when a friend is selected
+    setShowAddFriend(false);
   }
 
   return (
