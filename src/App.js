@@ -33,7 +33,9 @@ export default function App() {
   }
 
   function handleSelectFriend(friend) {
-    setSelectedFriend(selectedFriend => selectedFriend?.id ===friend.id ? null: friend);
+    setSelectedFriend((selectedFriend) =>
+      selectedFriend?.id === friend.id ? null : friend
+    );
     //hide the add friend form when a friend is selected
     setShowAddFriend(false);
   }
@@ -142,22 +144,44 @@ function AddFriendForm({ onAddFriend }) {
 }
 
 function FormSplitBill({ selectedFriend }) {
+  const [bill, setBill] = useState("");
+  const [paidByUser, setPaidByUser] = useState("");
+  //derived state
+  const paidByFriend = bill ? bill - paidByUser : "";
+  const [whoPaysBill, setWhoPaysBill] = useState("user");
+
   return (
     <form className="form-split-bill">
       <h2>Split a bill with {selectedFriend.name}</h2>
       <label>Bill Value</label>
-      <input type="text"></input>
+      <input
+        type="text"
+        value={bill}
+        onChange={(e) => setBill(Number(e.target.value))}
+      ></input>
 
       <label>Your expense</label>
-      <input type="text"></input>
+      <input
+        type="text"
+        value={paidByUser}
+        //check if the amount paid by user is greater than the original bill.
+        onChange={(e) =>
+          setPaidByUser(
+            Number(e.target.value) > bill ? paidByUser : Number(e.target.value)
+          )
+        }
+      ></input>
 
       <label>{selectedFriend.name} expense</label>
-      <input type="text" disabled></input>
+      <input type="text" value={paidByFriend} disabled></input>
 
       <label>Who is paying the bill</label>
-      <select>
+      <select
+        value={whoPaysBill}
+        onChange={(e) => setWhoPaysBill(e.target.value)}
+      >
         <option value="you">You</option>
-        <option value={selectedFriend.balance}>{selectedFriend.name}</option>
+        <option value={selectedFriend.name}>{selectedFriend.name}</option>
       </select>
 
       <Button>Split Bill</Button>
