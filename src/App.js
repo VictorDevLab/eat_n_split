@@ -33,6 +33,7 @@ export default function App() {
   }
 
   function handleSplitBill(value) {
+    // console.log(value);
     setFriends((friends) =>
       friends.map((friend) =>
         friend.id === selectedFriend.id
@@ -40,6 +41,8 @@ export default function App() {
           : friend
       )
     );
+    // close the form
+    setSelectedFriend(null);
   }
 
   function handleSelectFriend(friend) {
